@@ -198,6 +198,7 @@
 
 \newtoggle{@mestrado}
 \newtoggle{@doutorado}
+\newtoggle{@tcc}
 \newtoggle{@qualificacao}
 
 \NewDocumentCommand{\tese}{O{masc} O{}}{
@@ -212,6 +213,7 @@
   \renewcommand*{\@graueng}{Doctorate}
   \toggletrue{@doutorado}
   \togglefalse{@mestrado}
+  \togglefalse{@tcc}
   \ifstrequal{#1}{masc}{
     \renewcommand*{\@nometitulo}{Doutor}
     \RenewDocumentCommand{\@porquem}{m}{pelo candidato \@author}
@@ -236,6 +238,7 @@
   \renewcommand*{\@graueng}{Masters}
   \toggletrue{@mestrado}
   \togglefalse{@doutorado}
+  \togglefalse{@tcc}
   \ifstrequal{#1}{masc}{
     \renewcommand*{\@nometitulo}{Mestre}
     \RenewDocumentCommand{\@porquem}{m}{pelo candidato \@author}
@@ -250,6 +253,21 @@
   }{}
 }
 \NewDocumentCommand{\mestrado}{O{masc} O{}}{\dissertacao[#1][#2]}
+
+\NewDocumentCommand{\tcc}{O{masc}}{
+  \renewcommand*{\@nometrabalho}{Trabalho de conclusão de curso}
+  \renewcommand*{\@nometrabalhoeng}{Thesis}
+  \renewcommand*{\@nometituloeng}{Bachelor}
+  \renewcommand*{\@grau}{Bacharelado}
+  \renewcommand*{\@graueng}{Bachelor}
+  \renewcommand*{\@nometitulo}{Bacharel}
+  \togglefalse{@mestrado}
+  \togglefalse{@doutorado}
+  \toggletrue{@tcc}
+  \ifstrequal{#1}{masc}
+    {\RenewDocumentCommand{\@porquem}{m}{pelo candidato \@author}}
+    {\RenewDocumentCommand{\@porquem}{m}{pela candidata \@author}}
+}
 
 % Defaults quando o usuário não define alguma dessas variáveis
 
